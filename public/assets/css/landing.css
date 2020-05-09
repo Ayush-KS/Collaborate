@@ -1,0 +1,172 @@
+
+html{
+	height: 100%;
+	
+}
+
+body{
+	font-family: 'Lato', sans-serif;
+
+	background-image: url(https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80);
+	background-position: center; 
+	background-size: cover;
+
+}
+
+/* NAVBAR STYLING BEGINS */
+
+#mainNavbar{
+	background-color: rgba(0, 0, 0, 0.5);
+/* 	
+	height: 50px; */
+}
+
+/* #navbarSupportedContent {
+  background-color: rgba(0, 0, 0, 0.5);
+} */
+
+#mainNavbar .nav-link{
+
+	color: white;
+	
+}
+#mainNavbar .nav-link:hover {
+
+	color: red;
+	
+}
+
+.navbar-brand{
+	font-family: 'Oswald', sans-serif;
+	font-weight: 300;
+	text-transform: uppercase;
+
+}
+
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 1) !important;
+    transition: background 500ms;
+}
+
+/* navbar styling ends */
+
+button{
+	background-color: orange;
+	text-shadow: 
+				 0px 4px 20px rgba(100,0,0),
+				 0px 5px 23px orange;
+	margin-bottom: 10px;
+}
+
+#first-button{
+	/* margin: 0px 5px 0px 0px; */
+	background-color:red;
+
+}
+
+#second-button{
+	/* margin: 0px 0px 0px 5px; */
+	background-color:red;
+
+}
+
+
+#middleContent h1{
+	font-family: 'Oswald', sans-serif;
+	text-transform: uppercase;
+	font-weight: 300;
+	font-size: 4rem;
+	
+}
+
+#middleContent h3{
+	font-family: 'Bilbo Swash Caps', cursive;
+	/* font-family: 'Niconne', cursive; */
+	/* font-style: italic; */
+	font-size: 2.5rem;
+}
+
+
+hr{
+	width: 80%;
+	border-top: 1px solid #f8f8f8;
+	border-bottom: 1px solid black;/*basically giving a shadow to bottom*/
+
+}
+
+#middleContent{
+
+	margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+
+	width:50%;
+	background-color: rgba(255,255,255,0.5);
+
+	padding: auto auto;
+	padding-bottom: 2%;
+
+	color: white;
+	text-align: center;
+	
+	text-shadow: 
+				 0px 4px 20px grey,
+				 0px 10px 20px black;
+
+				 /* offset-x | offset-y | blur-radius | color */
+				 /*When more than one shadow is given, shadows are applied front-to-back, with the first-specified shadow on top.*/
+
+}
+
+@media(max-width:700px){
+    #middleContent h1{
+        /* font-weight: 100; */
+        font-size: 3rem;
+	}
+
+	#middleContent h3{
+		font-family: 'Bilbo Swash Caps', cursive;
+		/* font-family: 'Niconne', cursive; */
+		/* font-style: italic; */
+		font-size: 2.5rem;
+	}
+    
+}
+
+@media(max-width:576px){
+  #middleContent {
+    width: 85%;
+  }
+    #middleContent h1{
+        /* font-weight: 100; */
+        font-size: 2.5rem;
+	}
+	
+	#middleContent h3{
+		font-family: 'Bilbo Swash Caps', cursive;
+		/* font-family: 'Niconne', cursive; */
+		/* font-style: italic; */
+		font-size: 2rem;
+	}
+
+	
+    
+}
+
+@media(max-width:330px){
+
+    #middleContent h1{
+		/* font-weight: 100; */
+		font-style: bold;
+        font-size: 1.5rem;
+	}
+	
+	#middleContent h3{
+		font-family: 'Bilbo Swash Caps', cursive;
+		/* font-family: 'Niconne', cursive; */
+		/* font-style: italic; */
+		font-size: 1.5rem;
+	}
+	
+	
+}
