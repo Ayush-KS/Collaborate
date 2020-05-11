@@ -1,4 +1,3 @@
-<!-- linking stylesheet -->
 <link rel="stylesheet" href="./assets/css/landing.css" type="text/css">
 
 <!-- NAVBAR -->
@@ -19,8 +18,8 @@
 
       <ul class= "navbar-nav ml-auto navbar_content">
 
-        <li class="nav-item ml-3"> <a class="nav-link" href= "#"> Join <i class="fas fa-user-plus"></i> </a> </li>
-        <li class="nav-item ml-3"> <a class="nav-link" href= "#"> Login </i></a></li>
+        <li class="nav-item ml-3"> <a class="nav-link" data-toggle="modal" data-target="#signup-modal"> Join <i class="fas fa-user-plus"></i> </a> </li>
+        <li class="nav-item ml-3"> <a class="nav-link" data-toggle="modal" data-target="#login-modal"> Login </i></a></li>
 
       </ul>
 
@@ -30,12 +29,142 @@
 
 
 <div class="container" id="middleContent">
-
-
-            <h1>Collaborate</h1>
-            <h3>The search for your new project partner ends here!</h3>
-            <hr>
-            <!-- <button class="btn btn-default btn-lg btn-danger" id="first-button"> Get Started</button>  -->
-            <button class="btn btn-default btn-lg btn-danger" id="second-button"> Tell me more!</button>
-        
+    <h1>Collaborate</h1>
+    <h3>The search for your new project partner ends here!</h3>
+    <hr>
+    <!-- <button class="btn btn-default btn-lg btn-danger" id="first-button"> Get Started</button>  -->
+    <button class="btn btn-default btn-lg btn-danger" id="second-button"> Tell me more!</button>
 </div>
+
+<!-- Signup Modals -->
+<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="signup-modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signup-modal-title">Signup</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="signup-email">Email address</label>
+            <input type="email" class="form-control" id="signup-email" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Create a strong Password!</label>
+            <input type="password" class="form-control" id="signup-password" placeholder="Password">
+            <small id="passwordHelp" class="form-text text-muted">Make sure to make the password at least 6 letters long.</small>
+          </div>
+        </form>
+        <div class="m-0 d-flex justify-content-center">
+          <span class="mb-0" id="signup-error"></span>
+          <span class="spinner-border spinner-border-sm d-none" id="signup-spinner"></span>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary mb-0" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary mb-0" id="signup-btn">Signup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login Modal -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="login-modal-title">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="login-email">Email address</label>
+            <input type="email" class="form-control" id="login-email" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" class="form-control" id="login-password" placeholder="Password">
+          </div>
+        </form>
+        <div class="m-0 d-flex justify-content-center">
+          <span class="mb-0" id="login-error"></span>
+          <span class="spinner-border spinner-border-sm d-none" id="login-spinner"></span>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary mb-0" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary mb-0" id="login-btn">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  $(document).scroll(function(){
+      var $nav= $("#mainNavbar");
+      $nav.toggleClass("scrolled",$(this).scrollTop() > $nav.height());
+  });
+
+  $("#signup-btn").click(function() {
+        console.log("button clicked");
+        var email = $("#signup-email").val();
+        var password = $("#signup-password").val();
+        $("#signup-spinner").removeClass("d-none");
+        $("#signup-error").text("");
+        const auth = firebase.auth();
+        const promise = auth.createUserWithEmailAndPassword(email, password);
+        
+        promise
+          .then(function(user) {
+            $("#signup-spinner").addClass("d-none");
+            $("#signup-error").text("");
+            changePage("profile");
+            console.log(user);
+          })
+          .catch(function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            $("#signup-spinner").addClass("d-none");
+            $("#signup-error").text(errorMessage);
+            console.log(errorCode, errorMessage);
+          });
+    });
+
+    $("#login-btn").click(function() {
+        console.log("login clicked");
+        var email = $("#login-email").val().trim();
+        var password = $("#login-password").val().trim();
+        // var email = "123@gg.com";
+        // var password = "mynameis";
+        $("#login-spinner").removeClass("d-none");
+        $("#login-error").text("");
+        const auth = firebase.auth();
+        const promise = auth.signInWithEmailAndPassword(email, password);
+        
+        promise
+          .then(function(user) {
+            $("#login-spinner").addClass("d-none");
+            $("#login-error").text("");
+            changePage("search");
+            console.log(user);
+          })
+          .catch(function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            $("#login-spinner").addClass("d-none");
+            $("#login-error").text(errorMessage);
+            console.log(errorCode, errorMessage);
+          });
+    });
+  
+
+// hahahaha@gamil.com
+</script>
